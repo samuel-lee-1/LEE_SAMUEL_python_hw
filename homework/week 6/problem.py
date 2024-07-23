@@ -30,7 +30,7 @@ def test_linear_regression(function: Callable[[int], int], noise_amount: float, 
     xpoints_noise = []
     ypoints_noise = []
 
-    # make perfect line x and y points and ones with noise added
+    # make line y points from x with noise
     for x in range(size):
         xpoints.append(x)
         y = function(x)
