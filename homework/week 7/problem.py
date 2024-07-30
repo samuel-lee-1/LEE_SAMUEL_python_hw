@@ -3,13 +3,15 @@ import os
 import numpy as np 
 import pandas as pd
 from sklearn.tree import DecisionTreeClassifier
+from sklearn import metrics
+from sklearn import preprocessing
+from sklearn.model_selection import train_test_split
 
 my_data = pd.read_csv(os.path.join(sys.path[0], "drug200.csv"), delimiter=",")
 my_data[0:5]
 X = my_data[['Age', 'Sex', 'BP', 'Cholesterol', 'Na_to_K']].values
 X[0:5]
 
-from sklearn import preprocessing
 le_sex = preprocessing.LabelEncoder()
 le_sex.fit(['F','M'])
 X[:,1] = le_sex.transform(X[:,1]) 
@@ -27,8 +29,6 @@ X[:,3] = le_Chol.transform(X[:,3])
 X[0:5]
 y = my_data["Drug"]
 y[0:5]
-
-from sklearn.model_selection import train_test_split
 X_trainset, X_testset, y_trainset, y_testset = train_test_split(X, y, test_size=0.3, random_state=3)
 
 print("X_trainsetX SHAPE:  " + str(X_trainset.shape))
@@ -43,7 +43,4 @@ predTree = drugTree.predict(X_testset)
 
 print (predTree [0:5])
 print (y_testset [0:5])
-
-from sklearn import metrics
-import matplotlib.pyplot as plt
 print("DecisionTrees's Accuracy: ", metrics.accuracy_score(y_testset, predTree))
